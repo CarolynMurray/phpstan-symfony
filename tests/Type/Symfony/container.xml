@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="app.class">Foo</parameter>
+        <parameter key="app.string">abcdef</parameter>
+        <parameter key="app.int">123</parameter>
+        <parameter key="app.int_as_string" type="string">123</parameter>
+        <parameter key="app.int_as_processor">%env(int:APP_INT)%</parameter>
+        <parameter key="app.float">123.45</parameter>
+        <parameter key="app.float_as_string" type="string">123.45</parameter>
+        <parameter key="app.float_as_processor">%env(float:APP_FLOAT)%</parameter>
+        <parameter key="app.boolean">true</parameter>
+        <parameter key="app.boolean_as_string" type="string">true</parameter>
+        <parameter key="app.boolean_as_processor">%env(bool:APP_BOOL)%</parameter>
+        <parameter key="app.list" type="collection">
+            <parameter>en</parameter>
+            <parameter>es</parameter>
+            <parameter>fr</parameter>
+        </parameter>
+        <parameter key="app.list_of_int" type="collection">
+            <parameter>123</parameter>
+            <parameter>456</parameter>
+            <parameter>789</parameter>
+        </parameter>
+        <parameter key="app.list_of_int_as_processor" type="collection">
+            <parameter>%env(int:APP_INT)%</parameter>
+            <parameter>%env(int:APP_INT)%</parameter>
+            <parameter>%env(int:APP_INT)%</parameter>
+        </parameter>
+        <parameter key="app.list_of_list" type="collection">
+            <parameter type="collection">
+                <parameter key="name">the name</parameter>
+                <parameter key="value">the value</parameter>
+            </parameter>
+            <parameter type="collection">
+                <parameter key="name">another name</parameter>
+                <parameter key="value">another value</parameter>
+            </parameter>
+        </parameter>
+        <parameter key="app.list_of_different_list" type="collection">
+            <parameter type="collection">
+                <parameter key="name">the name</parameter>
+                <parameter key="value">the value</parameter>
+            </parameter>
+            <parameter type="collection">
+                <parameter key="age">12</parameter>
+                <parameter key="size">32</parameter>
+            </parameter>
+        </parameter>
+        <parameter key="app.array_of_list" type="collection">
+            <parameter key="foo" type="collection">
+                <parameter key="name">the name</parameter>
+                <parameter key="value">the value</parameter>
+            </parameter>
+            <parameter type="collection">
+                <parameter key="name">another name</parameter>
+                <parameter key="value">another value</parameter>
+            </parameter>
+        </parameter>
+        <parameter key="app.list_of_things" type="collection">
+            <parameter key="url">%env(string:APP_STRING)%</parameter>
+            <parameter key="endpoint">%env(string:APP_STRING)%</parameter>
+            <parameter key="version">%env(string:APP_STRING)%</parameter>
+            <parameter key="payment" type="collection">
+                <parameter key="default" type="collection">
+                    <parameter key="username">%env(string:APP_STRING)%</parameter>
+                    <parameter key="password">%env(string:APP_STRING)%</parameter>
+                    <parameter key="signature">%env(string:APP_STRING)%</parameter>
+                </parameter>
+            </parameter>
+            <parameter key="api" type="collection">
+                <parameter key="mode">%env(string:APP_STRING)%</parameter>
+                <parameter key="default" type="collection">
+                    <parameter key="username">%env(string:APP_STRING)%</parameter>
+                    <parameter key="password">%env(string:APP_STRING)%</parameter>
+                    <parameter key="signature">%env(string:APP_STRING)%</parameter>
+                </parameter>
+            </parameter>
+        </parameter>
+        <parameter key="app.map" type="collection">
+            <parameter key="a">value of a</parameter>
+            <parameter key="b">value of b</parameter>
+            <parameter key="c">value of c</parameter>
+        </parameter>
+        <parameter key="app.binary" type="binary">VGhpcyBpcyBhIEJlbGwgY2hhciAH</parameter>
+        <parameter key="app.constant">Y-m-d\TH:i:sP</parameter>
+		<parameter key="test_collection" type="collection"/>
+		<parameter key="non_empty_collection" type="collection">
+			<parameter>value</parameter>
+		</parameter>
+    </parameters>
+
+    <services>
+        <service id="foo" class="Foo" public="true"></service>
+        <service id="parameterised_foo" class="%app.class%"></service>
+        <service id="parameterised_bar" class="%app.class%\Bar"></service>
+        <service id="synthetic" class="Synthetic" public="true" synthetic="true" />
+    </services>
+</container>
